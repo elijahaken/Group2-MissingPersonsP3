@@ -1,0 +1,66 @@
+{% extends 'base.html' %} {% block bodyContent %}       
+         <!-- Masthead-->
+        <header class="masthead">
+            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <div class="text-center">
+                        <h1 class="mx-auto my-0 text-uppercase">Missing Persons</h1>
+                        <h4 class="text-white-50 mx-auto mt-2 mb-5">This site contains a database of all the missing persons in Utah</h4>
+                        <a class="btn btn-primary" href="#table">View Table</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Table-->
+        <section class="about-section text-center" id="table">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-lg-8">
+                        <h2 class="text-white mb-4">Missing Persons Table</h2>
+                        <p class="text-white-50 mx-auto mt-2 mb-5">Human trafficking is a modern-day slavery involving the illegal trade of people for exploitation or commercial gain. </p>
+                        <style>
+                            .table td {
+                              color: white;
+                            }
+                            .table th {
+                            background-color: #64a19d;
+                            }
+                            .table-hover tbody tr:hover td,
+                            .table-hover tbody tr:hover th {
+                            color: #64a19d;
+                            }
+                            .clickable-row {
+                                cursor: pointer;
+                              }
+                            </style>
+                        <table class="table table-bordered table-hover table-condensed">
+                            <thead><tr><th title="Field #1">Date Missing</th>
+                            <th title="Field #2">Last Name</th>
+                            <th title="Field #3">First Name</th>
+                            <th title="Field #4">Age at Missing</th>
+                            <th title="Field #5">City</th>
+                            <th title="Field #6">State</th>
+                            <th title="Field #7">Gender</th>
+                            <th title="Field #8">Race</th>
+                            </tr></thead>
+                            <tbody>
+                            {% for person in persons %}    
+                            
+                            <td>{{ person.date_of_disappearance }}</td>
+                            <td>{{ person.last_name |title}}</td>
+                            <!--This will take you to an external page to view an individual persons file.-->
+                            <td><a href="{% url 'personView' personId=person.id %}" target="_blank"> {{ person.first_name|title }}</a></td>
+                            <td align="right">{{ person.age_at_missing }}</td>
+                            <td>{{ person.city_of_disappearance|title }}</td>
+                            <td>{{ person.state_of_disappearance|upper }}</td>
+                            <td>{{ person.gender|title }}</td>
+                            <td>{{ person.race }}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody></table>
+                    </div>
+                </div>
+                {% comment %} <img class="img-fluid" src="{% static 'assets/img/PersonWalk.jpg' %}" alt="..." > {% endcomment %}
+            </div>
+        </section>
+{% endblock %}    
