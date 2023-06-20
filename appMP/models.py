@@ -23,6 +23,9 @@ class MissingPerson(models.Model):
     race = models.ForeignKey('Race',null=True,blank=True,on_delete=models.SET_NULL)
     gender = models.ForeignKey('Gender',null=True,blank=True,on_delete=models.SET_NULL)
     picture = models.ImageField(upload_to="images/",blank=True,null=True)
+
+    def __str__(self):
+        return self.last_name, self.first_name
     
 
     
